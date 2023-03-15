@@ -1,18 +1,41 @@
 public class MonthData {
-
     int[] days = new int[30];
 
     void printDaysAndStepsFromMonth() {
-        for (int i = 0; i < days.length; i++) {
-            System.out.println(days[i + 1] + " день: ");
-        }
+        for (int i = 1; i <= days.length; i++) {
+                System.out.println(i + " день: " + days[i - 1]);
+            }
     }
 
-    void printMenu() {
-        System.out.println("1 - Количество пройденных шагов по дням:");
-        System.out.println("2 - Общее количество шагов за меся:");
-        System.out.println("3 - Максимальное количество шагов за месяц:");
-        System.out.println("4 - Лучшая серия:");
-        System.out.println("5 - Назад.");
+    int sumStepsFromMonth() {
+        int sumSteps = 0;
+        for (int i = 0; i < days.length; i++) {
+            sumSteps = sumSteps + days[i];
+        }
+        return sumSteps;
+    }
+
+    int maxSteps() {
+        int maxSteps = 0;
+        for (int i = 0; i < days.length; i++) {
+            if (days[i] > maxSteps) {
+                maxSteps = days[i];
+            }
+        }
+        return maxSteps;
+    }
+
+    int bestSeries(int goalByStepsPerDay) {
+        int currentSeries = 0;
+        int finalSeries = 0;
+        for (int i = 0; i < days.length; i++) {
+            if (days[i] >= goalByStepsPerDay) {
+                currentSeries = currentSeries + 1;
+                finalSeries = currentSeries;
+            } else {
+                currentSeries = 0;
+            }
+        }
+        return finalSeries;
     }
 }
